@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  hosting:
+    image: ${DOCKER_REGISTRY-}hosting
+    build:
+      context: .
+      dockerfile: src/Hosting/Dockerfile

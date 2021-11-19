@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UserSecretsId>8676633c-079c-4cf5-b62f-7e13aa843adb</UserSecretsId>
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+		<DockerfileContext>..\..</DockerfileContext>
+		<RootNamespace>Hosting</RootNamespace>
+		<DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- Global usign -->
+		<Using Include="System.Collections.Concurrent" />
+		<Using Include="System.Reflection" />
+		<Using Include="Microsoft.Extensions.DependencyInjection" />
+		<Using Include="Microsoft.AspNetCore.Routing" />
+		<Using Include="Microsoft.AspNetCore.Builder" />
+		<Using Include="Microsoft.AspNetCore.Http" />
+		<Using Include="Microsoft.OpenApi.Models" />
+		<Using Include="Serilog" />
+		<Using Include="Serilog.Events" />
+		<Using Include="Serilog.Sinks.SpectreConsole" />
+		<Using Include="FrameworkAgnostic.AspNetCore.Middlewares" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerUi" Version="6.2.3" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+		<PackageReference Include="Serilog.Extensions.Hosting" Version="4.2.0" />
+		<PackageReference Include="Serilog.Sinks.Console" Version="4.0.0" />
+		<PackageReference Include="Serilog.Sinks.SpectreConsole" Version="0.1.1" />
+		<PackageReference Include="Microsoft.Extensions.DependencyModel" Version="6.0.0-*" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\FrameworkAgnostic\FrameworkAgnostic.csproj" />
+		<ProjectReference Include="..\Modules\Hello\HelloModule.Api\Hello.Api.csproj" />
+	</ItemGroup>
+
+</Project>

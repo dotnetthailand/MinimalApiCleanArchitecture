@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>true</ImplicitUsings>
+		<LangVersion>latest</LangVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<!-- Global usign -->
+		<Using Include="System.Collections.Concurrent" />
+		<Using Include="System.Reflection" />		
+		<Using Include="System.Text.Json" />
+		<Using Include="Microsoft.AspNetCore.Mvc" />
+		<Using Include="Microsoft.Extensions.DependencyInjection" />
+		<Using Include="Microsoft.AspNetCore.Routing" />
+		<Using Include="Microsoft.AspNetCore.Builder" />
+		<Using Include="Microsoft.AspNetCore.Http" />
+		<Using Include="FluentValidation" />
+		<Using Include="FluentValidation.Results" />
+		<Using Include="Agoda.IoC.NetCore" />
+		<Using Include="Agoda.IoC.Core" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Agoda.IoC.NetCore" Version="1.1.67" />
+		<PackageReference Include="FluentValidation" Version="10.3.4" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+	</ItemGroup>
+
+</Project>
