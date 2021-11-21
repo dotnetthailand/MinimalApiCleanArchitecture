@@ -1,4 +1,4 @@
-﻿namespace Microsoft.Extensions.DependencyInjection;
+﻿namespace Microsoft.AspNetCore.Builder;
 
 internal static partial class ServiceCollectionExtensions
 {

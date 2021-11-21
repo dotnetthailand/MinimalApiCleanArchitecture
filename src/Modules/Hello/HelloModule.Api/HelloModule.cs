@@ -1,7 +1,9 @@
 ﻿using FrameworkAgnostic.Attributes;
 using Hello.Services;
 
-namespace HelloModule.Api;
+
+
+namespace Hello.Api;
 
 [Import(typeof(HelloService))]
 public class HelloModule : IModule
@@ -10,7 +12,6 @@ public class HelloModule : IModule
     {
         return services;
     }
-
     public IEndpointRouteBuilder MapEndpoints(IEndpointRouteBuilder endpoints)
     {
         endpoints.MapGet("/hello", GetHello)
@@ -30,14 +31,8 @@ public class HelloModule : IModule
         return endpoints;
     }
 
-    // Table of content in module
     private static IResult GetHello(HttpRequest req, IHelloService helloService)
     {
-
-        throw new FrameworkAgnostic.Common.Exceptions.ValidationException(new List<ValidationFailure> { 
-                    new ValidationFailure("c","faile errer message")
-                  });
-
 
         return Results.Ok(helloService.Hello());
     }

@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<LangVersion>latest</LangVersion>
+	</PropertyGroup>
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\..\..\Library\RepoDb.Microsoft.Extensions.DependencyInjection\RepoDb.Microsoft.Extensions.DependencyInjection.csproj" />
+	  <ProjectReference Include="..\Customer.Application\Customer.Application.csproj" />
+	</ItemGroup>
+
+
+	<ItemGroup>
+		<PackageReference Include="RepoDb.Sqlite.Microsoft" Version="1.0.0" />
+	</ItemGroup>
+</Project>

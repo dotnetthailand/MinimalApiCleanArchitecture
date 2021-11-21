@@ -1,17 +1,19 @@
+using Hosting;
+using RepoDb;
+SqliteBootstrap.Initialize();
+
 var builder = WebApplication.CreateBuilder(args);
-// ConfigureServices
+var dbConnection = builder.Configuration.GetConnectionString("CustomerDb");
 builder.AddSerilog();
 builder.AddSwagger();
-
-builder.RegisterModules(typeof(HelloModule.Api.HelloModule));
-
+builder.AddModuleMarker<EntryPointMarker>();
 var app = builder.Build();
-
-// Global Exception handler
 app.UseMiddleware<GlobalExceptionMiddleware>();
-
-// Configure
 app.UseSwaggerEndpoints();
+app.UseRepoDB();
+app.UseModuleEndpoints();
 
-app.MapEndpoints();
+// Seed Database
+await Database.SeedData(dbConnection);
+
 app.Run();

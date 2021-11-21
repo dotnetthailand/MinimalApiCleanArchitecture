@@ -1,7 +1,5 @@
 ﻿namespace FrameworkAgnostic.AspNetCore.Middlewares.GlobalException;
 
-using FrameworkAgnostic.Common.Exceptions.Handlers;
-
 [RegisterSingleton]
 public class DefaultExceptionHandlerLocator : IExceptionHandlerLocator
 {
@@ -29,7 +27,7 @@ public class DefaultExceptionHandlerLocator : IExceptionHandlerLocator
 
             throw new InvalidOperationException(message);
         }
-        return available.First();
+        return available.FirstOrDefault();
     }
     private static Type CreateExceptionHandlerType(Type type) => typeof(AbstractExceptionHandler<>).MakeGenericType(type);
 }

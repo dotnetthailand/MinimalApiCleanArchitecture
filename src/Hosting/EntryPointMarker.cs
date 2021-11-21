@@ -1,13 +1,11 @@
-﻿using FrameworkAgnostic;
+﻿using Customer.WebApi;
+using FrameworkAgnostic;
 using FrameworkAgnostic.Attributes;
 
 namespace Hosting;
 
-[Import(typeof(HelloModule.Api.HelloModule))]
-public class EntryPointMarker : IRegisterModule
+// Register Module (by domain main entry point)
+[ImportAssembly(typeof(CustomerModule))]
+public class EntryPointMarker : IEntryPointMarker
 {
-    public IServiceCollection RegisterModule(IServiceCollection builder)
-    {
-        return builder;
-    }
 }

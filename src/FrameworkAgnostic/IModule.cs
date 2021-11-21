@@ -1,13 +1,15 @@
 ﻿namespace FrameworkAgnostic;
+
+public interface IEntryPointMarker { }
+
 public interface IRegisterModule
 {
-    IServiceCollection RegisterModule(IServiceCollection builder);
+    void RegisterModule(IServiceCollection builder,IConfiguration configuration );
 }
 public interface IMapEndpoints
 {
-    IEndpointRouteBuilder MapEndpoints(IEndpointRouteBuilder endpoints);
+    void MapEndpoints(IEndpointRouteBuilder endpoints);
 }
-public interface IModule : IRegisterModule
+public interface IModule : IRegisterModule, IMapEndpoints
 {
 }
-

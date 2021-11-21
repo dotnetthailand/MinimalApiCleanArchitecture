@@ -1,8 +1,5 @@
 ﻿namespace FrameworkAgnostic.AspNetCore.Middlewares;
 
-using FrameworkAgnostic.AspNetCore.Middlewares.GlobalException;
-using System.Net;
-
 public class GlobalExceptionMiddleware
 {
     private readonly RequestDelegate _next;

@@ -1,0 +1,15 @@
+﻿global using Agoda.IoC.Core;
+global using AutoMapper;
+global using FluentValidation;
+global using FluentValidation.Results;
+global using Framework.Exceptions.Handlers;
+global using FrameworkAgnostic;
+global using FrameworkAgnostic.AspNetCore.Middlewares.GlobalException;
+global using FrameworkAgnostic.Modularity;
+global using Microsoft.AspNetCore.Http;
+global using Microsoft.AspNetCore.Routing;
+global using Microsoft.Extensions.Configuration;
+global using Microsoft.Extensions.DependencyInjection;
+global using System.Collections.Concurrent;
+global using System.Net;
+global using System.Reflection;

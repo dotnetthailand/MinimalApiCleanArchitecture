@@ -34,10 +34,12 @@
 		<PackageReference Include="Serilog.Sinks.Console" Version="4.0.0" />
 		<PackageReference Include="Serilog.Sinks.SpectreConsole" Version="0.1.1" />
 		<PackageReference Include="Microsoft.Extensions.DependencyModel" Version="6.0.0-*" />
+		<PackageReference Include="RepoDb.Sqlite.Microsoft" Version="1.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\FrameworkAgnostic\FrameworkAgnostic.csproj" />
+		<ProjectReference Include="..\Framework\MIcrosoft.Extention.WebApplicationBuilder\FrameworkAgnostic.Microsoft.Extensions.DependencyInjection.csproj" />
+		<ProjectReference Include="..\Modules\CustomerModule\Customer.WebApi\Customer.WebApi.csproj" />
 		<ProjectReference Include="..\Modules\Hello\HelloModule.Api\Hello.Api.csproj" />
 	</ItemGroup>
 
