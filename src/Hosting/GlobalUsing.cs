@@ -1,4 +1,5 @@
-﻿global using Customer.WebApi;
+﻿// Feature 2: Global using
+global using Customer.WebApi;
 global using Lite.Api;
 global using FrameworkAgnostic;
 global using FrameworkAgnostic.AspNetCore.Middlewares;

@@ -7,8 +7,8 @@ public class DefaultExceptionHandlerLocator : IExceptionHandlerLocator
     private readonly ConcurrentDictionary<Type, IExceptionHandler> _foundExceptionHandler = new();
 
     public DefaultExceptionHandlerLocator(IEnumerable<IExceptionHandler> exceptionHandlers) => _exceptionHandlers = exceptionHandlers;
-    public IExceptionHandler GetExceptionHandler<TException>() => this.GetExceptionHandler(typeof(TException));
-    public IExceptionHandler GetExceptionHandler(Type type) => this._foundExceptionHandler.GetOrAdd(type, this.FindExceptionHandler);
+    public IExceptionHandler GetExceptionHandler<TException>() => GetExceptionHandler(typeof(TException));
+    public IExceptionHandler GetExceptionHandler(Type type) => _foundExceptionHandler.GetOrAdd(type, this.FindExceptionHandler);
     private IExceptionHandler FindExceptionHandler(Type type)
     {
         var fullType = CreateExceptionHandlerType(type);
