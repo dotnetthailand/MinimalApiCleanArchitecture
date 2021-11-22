@@ -1,4 +1,4 @@
-﻿namespace Customer.Application.Repositories;
+﻿namespace Customer.Application.Common.Interfaces;
 
 public interface ICustomerRepository
 {

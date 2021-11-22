@@ -1,15 +1,15 @@
 ﻿namespace FrameworkAgnostic;
 
 public interface IEntryPointMarker { }
-
-public interface IRegisterModule
+public interface IDefineServices
 {
-    void RegisterModule(IServiceCollection builder,IConfiguration configuration );
+    void DefineServices(IServiceCollection builder, IConfiguration configuration);
 }
-public interface IMapEndpoints
+public interface IDefineEndpoints
 {
-    void MapEndpoints(IEndpointRouteBuilder endpoints);
+    void DefineEndpoints(IEndpointRouteBuilder endpoints);
 }
-public interface IModule : IRegisterModule, IMapEndpoints
-{
-}
+/// <summary>
+/// This class was registerd into IoC with transient lifetime
+/// </summary>
+public interface IModule : IDefineServices, IDefineEndpoints { }

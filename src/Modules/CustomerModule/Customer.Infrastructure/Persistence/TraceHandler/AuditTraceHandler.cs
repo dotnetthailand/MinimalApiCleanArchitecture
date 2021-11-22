@@ -1,9 +1,5 @@
 ﻿namespace Customer.Infrastructure.Persistence.TraceHandler;
 
-using Agoda.IoC.Core;
-using RepoDb;
-using SharedKernel.Entities;
-
 public interface IAuditTraceHandler
 {
     void BeforeInsert(CancellableTraceLog log);

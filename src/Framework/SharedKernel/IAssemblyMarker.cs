@@ -1,3 +1,3 @@
-﻿namespace Customer.Application;
+﻿namespace SharedKernel;
 
 public interface IAssemblyMarker { }

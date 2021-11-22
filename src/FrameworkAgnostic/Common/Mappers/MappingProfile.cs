@@ -2,6 +2,10 @@
 
 public abstract class MappingProfile : Profile
 {
+    public MappingProfile(Assembly assembly)
+    {
+        ApplyMappingsFromAssembly(assembly);
+    }
     public virtual void ApplyMappingsFromAssembly(Assembly assembly)
     {
         var types = assembly.GetExportedTypes()

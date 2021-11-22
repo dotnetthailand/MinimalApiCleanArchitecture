@@ -1,9 +1,10 @@
 ﻿namespace Framework.Exceptions.Handlers;
 
-public abstract class AbstractExceptionHandler<T> : IExceptionHandler<T> where T : Exception
+public abstract class AbstractExceptionHandler<T> : IExceptionHandler<T>
+    where T : Exception
 {
-    public async Task HandleException(Exception exception, HttpResponse httpResponse) => await HandleExceptionInternal((T)exception, httpResponse);
-    public async Task HandleException(T exception, HttpResponse httpResponse) =>  await HandleExceptionInternal(exception, httpResponse);
-    protected abstract Task HandleExceptionInternal(T exception, HttpResponse httpResponse);
+    public async Task<(object Problem, int StatusCode)> HandleException(Exception exception) => await HandleExceptionInternal((T)exception);
+    public async Task<(object Problem, int StatusCode)> HandleException(T exception) => await HandleExceptionInternal(exception);
+    protected abstract Task<(object Problem, int StatusCode)> HandleExceptionInternal(T exception);
 }
 

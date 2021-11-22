@@ -1,9 +1,6 @@
-using Hosting;
-using RepoDb;
+// Feature 1: .NET Top level statement
 SqliteBootstrap.Initialize();
-
 var builder = WebApplication.CreateBuilder(args);
-var dbConnection = builder.Configuration.GetConnectionString("CustomerDb");
 builder.AddSerilog();
 builder.AddSwagger();
 builder.AddModuleMarker<EntryPointMarker>();
@@ -11,9 +8,6 @@ var app = builder.Build();
 app.UseMiddleware<GlobalExceptionMiddleware>();
 app.UseSwaggerEndpoints();
 app.UseRepoDB();
-app.UseModuleEndpoints();
-
-// Seed Database
-await Database.SeedData(dbConnection);
-
-app.Run();
+app.UseEndpointDefinitions();
+await Database.SeedData(builder.Configuration.GetConnectionString("CustomerDb"));
+await app.RunAsync();

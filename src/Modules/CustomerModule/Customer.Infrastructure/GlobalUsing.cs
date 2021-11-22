@@ -1,0 +1,12 @@
+﻿global using Agoda.IoC.Core;
+global using Customer.Application.Common.Interfaces;
+global using Customer.Infrastructure.Persistence;
+global using Customer.Infrastructure.Persistence.TraceHandler;
+global using Microsoft.AspNetCore.Builder;
+global using Microsoft.Data.Sqlite;
+global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.Extensions.Options;
+global using RepoDb;
+global using RepoDb.Interfaces;
+global using RepoDb.Microsoft.Extensions.DependencyInjection;
+global using SharedKernel.Entities;

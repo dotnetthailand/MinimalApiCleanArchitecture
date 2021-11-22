@@ -10,37 +10,18 @@
 		<RootNamespace>Hosting</RootNamespace>
 		<DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
 	</PropertyGroup>
-
-	<ItemGroup>
-		<!-- Global usign -->
-		<Using Include="System.Collections.Concurrent" />
-		<Using Include="System.Reflection" />
-		<Using Include="Microsoft.Extensions.DependencyInjection" />
-		<Using Include="Microsoft.AspNetCore.Routing" />
-		<Using Include="Microsoft.AspNetCore.Builder" />
-		<Using Include="Microsoft.AspNetCore.Http" />
-		<Using Include="Microsoft.OpenApi.Models" />
-		<Using Include="Serilog" />
-		<Using Include="Serilog.Events" />
-		<Using Include="Serilog.Sinks.SpectreConsole" />
-		<Using Include="FrameworkAgnostic.AspNetCore.Middlewares" />
-	</ItemGroup>
-
 	<ItemGroup>
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
 		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerUi" Version="6.2.3" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
 		<PackageReference Include="Serilog.Extensions.Hosting" Version="4.2.0" />
-		<PackageReference Include="Serilog.Sinks.Console" Version="4.0.0" />
 		<PackageReference Include="Serilog.Sinks.SpectreConsole" Version="0.1.1" />
-		<PackageReference Include="Microsoft.Extensions.DependencyModel" Version="6.0.0-*" />
-		<PackageReference Include="RepoDb.Sqlite.Microsoft" Version="1.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\Framework\MIcrosoft.Extention.WebApplicationBuilder\FrameworkAgnostic.Microsoft.Extensions.DependencyInjection.csproj" />
 		<ProjectReference Include="..\Modules\CustomerModule\Customer.WebApi\Customer.WebApi.csproj" />
-		<ProjectReference Include="..\Modules\Hello\HelloModule.Api\Hello.Api.csproj" />
+		<ProjectReference Include="..\Modules\LiteModule\Lite.Api\Lite.Api.csproj" />
 	</ItemGroup>
 
 </Project>

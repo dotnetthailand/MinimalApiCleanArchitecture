@@ -2,31 +2,27 @@
 
 public static class ApplicationBuilderExtensions
 {
-
-    internal static readonly List<IModule> registeredModules = new();
-    internal static bool isConfigureSerices = false;
-
+    internal static bool isConfigureServices = false;
     public static WebApplicationBuilder AddModuleMarker<TEntryPointMarker>(this WebApplicationBuilder builder)
         where TEntryPointMarker : IEntryPointMarker
     {
-        if (isConfigureSerices) return builder;
-
+        if (isConfigureServices) return builder;
         HashSet<Assembly> assemblies = new();
-        Type entryType = typeof(TEntryPointMarker);
-        assemblies.Add(typeof(IFrameworkAgnosticAssemblyMaker).GetTypeInfo().Assembly);
-        assemblies.Add(typeof(IShareKernelAssemblyMaker).GetTypeInfo().Assembly);
-
-        foreach (var dependedModuleType in entryType.GetAutoWireProvider().
-                                                     SelectMany(descriptor => descriptor.GetDependedTypes()))
-        {
-            // Register module
+        var entryType = typeof(TEntryPointMarker);
+        assemblies.Add(typeof(FrameworkAgnostic.IAssemblyMarker).Assembly);
+        assemblies.Add(typeof(SharedKernel.IAssemblyMarker).Assembly);
+        foreach (var dependedModuleType in entryType
+                                            .GetAutoWireProvider()
+                                            .SelectMany(descriptor => descriptor.GetDependedTypes()))
+        {           
             builder.RegisterModules(assemblies, dependedModuleType);
         }
+        // Add Core Framework
         builder.Services.AutoWireAssembly(assemblies.ToArray(), false);
         builder.Services.AddAutoMapper(assemblies.ToArray());
         builder.Services.AddRepoDB(assemblies.ToArray());
 
-        isConfigureSerices = true;
+        isConfigureServices = true;
         return builder;
     }
 
@@ -55,36 +51,43 @@ public static class ApplicationBuilderExtensions
             {
                 assemblies.Add(dependedModuleType.GetTypeInfo().Assembly);
             }
-            module.RegisterModule(builder.Services, builder.Configuration);
-            registeredModules.Add(module);
+
+            if (module.IsAssignableTo(typeof(IModule)))
+            {
+                // Ref: https://www.strathweb.com/2019/11/instantiating-an-object-without-using-constructor-in-c/
+                var instance = FormatterServices.GetUninitializedObject(module) as IModule;
+                instance!.DefineServices(builder.Services, builder.Configuration);
+            }
+            builder.Services.Add(
+                new ServiceDescriptor(
+                    typeof(IDefineEndpoints), 
+                    module.UnderlyingSystemType, 
+                    ServiceLifetime.Transient));
         }
         return builder;
     }
 
-    public static WebApplication UseModuleEndpoints(this WebApplication app)
+    public static WebApplication UseEndpointDefinitions(this WebApplication app)
     {
-        foreach (var module in registeredModules)
+        var moduleEndpoints = app.Services.GetRequiredService<IEnumerable<IDefineEndpoints>>();
+        foreach (var moduleEndpoint in moduleEndpoints)
         {
-            module.MapEndpoints(app);
+            moduleEndpoint.DefineEndpoints(app);
         }
         return app;
     }
-
-    private static IEnumerable<IModule> DiscoverModules(IEnumerable<Assembly> assembliesToScan)
+    
+    private static IEnumerable<Type> DiscoverModules(IEnumerable<Assembly> assembliesToScan)
     {
         if (!assembliesToScan.Any())
             throw new ArgumentException("No assemblies found to scan. Supply at least one assembly to scan for module.");
 
-        var concretions =
-            assembliesToScan
+        return assembliesToScan
                     .SelectMany(a => a.DefinedTypes)
                     .Where(type => type.IsConcrete() && type.IsAssignableTo(typeof(IModule)))
-                    .Select(Activator.CreateInstance)
-                    .Cast<IModule>();
-
-        return concretions;
+                    .Select(typeInfo => typeInfo.UnderlyingSystemType);
     }
-
+    
     private static bool IsConcrete(this Type type) => !type.GetTypeInfo().IsAbstract && !type.GetTypeInfo().IsInterface;
 
 }

@@ -6,7 +6,7 @@ public class GlobalExceptionMiddleware
     private readonly IExceptionHandlerLocator _exceptionHandlerLocator;
 
     public GlobalExceptionMiddleware(
-        RequestDelegate next, 
+        RequestDelegate next,
         IExceptionHandlerLocator exceptionHandlerLocator)
     {
         _next = next;
@@ -22,16 +22,20 @@ public class GlobalExceptionMiddleware
         catch (Exception exception)
         {
             var response = context.Response;
-            var exceptionHandler = _exceptionHandlerLocator.GetExceptionHandler(exception.GetType());                    
-            if(exceptionHandler is not null)
+            var exceptionHandler = _exceptionHandlerLocator.GetExceptionHandler(exception.GetType());
+            if (exceptionHandler is not null)
             {
-                await exceptionHandler.HandleException(exception, response);
+
+                var exceptionInfo = await exceptionHandler.HandleException(exception);
+                response.StatusCode = exceptionInfo.StatusCode;
+                response.ContentType = "application/json";
+                await response.WriteAsync(JsonSerializer.Serialize(exceptionInfo.Problem));
             }
             else
             {
-                response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                response.StatusCode = StatusCodes.Status500InternalServerError;
                 await response.WriteAsync("An error occurred!!");
-            }           
+            }
         }
     }
 }

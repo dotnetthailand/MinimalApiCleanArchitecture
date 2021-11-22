@@ -1,13 +1,4 @@
-﻿using Agoda.IoC.Core;
-using Customer.Infrastructure.Persistence.TraceHandler;
-using RepoDb;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Customer.Infrastructure.Persistence;
+﻿namespace Customer.Infrastructure.Persistence;
 
 [RegisterSingleton(For = typeof(ICustomerDbTrace))]
 public class CustomerDbTrace : ICustomerDbTrace

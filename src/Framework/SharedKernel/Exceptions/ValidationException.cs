@@ -1,4 +1,5 @@
-﻿namespace SharedKernel.Exceptions;
+﻿
+namespace SharedKernel.Exceptions;
 
 public class ValidationException : Exception
 {
@@ -17,6 +18,5 @@ public class ValidationException : Exception
     }
 
     public IDictionary<string, string[]> Errors { get; }
-
-    public int StatusCode => (int)HttpStatusCode.BadRequest;
+    public int StatusCode { get; set; } = StatusCodes.Status400BadRequest;
 }

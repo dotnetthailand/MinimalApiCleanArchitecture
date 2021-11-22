@@ -1,3 +1,3 @@
 ﻿namespace Customer.Infrastructure;
 
-public interface IAssemblyMaker { }
+public interface IAssemblyMarker { }

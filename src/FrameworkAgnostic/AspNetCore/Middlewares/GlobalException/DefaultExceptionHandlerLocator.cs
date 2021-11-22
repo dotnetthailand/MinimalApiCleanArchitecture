@@ -30,5 +30,6 @@ public class DefaultExceptionHandlerLocator : IExceptionHandlerLocator
         return available.FirstOrDefault();
     }
     private static Type CreateExceptionHandlerType(Type type) => typeof(AbstractExceptionHandler<>).MakeGenericType(type);
+
 }
 
