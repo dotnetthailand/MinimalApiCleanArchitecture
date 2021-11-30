@@ -32,9 +32,9 @@ public class CreateCustomerProblemDetails : ProblemDetails
 [RegisterSingleton(For = typeof(IExceptionHandler), OfCollection = true)]
 public class CreateCustomerExceptionHandler : AbstractExceptionHandler<CreateCustomerException>
 {
-    protected override async Task<(object Problem, int StatusCode)> HandleExceptionInternal(CreateCustomerException exception)
-    {        
-        var problemDetails = new CreateCustomerProblemDetails
+    protected override Task<(object Problem, int StatusCode)> HandleExceptionInternal(CreateCustomerException exception)
+    {
+        CreateCustomerProblemDetails problemDetails = new()
         {
             Title = exception.Title,
             Detail = exception.Detail,
@@ -43,7 +43,7 @@ public class CreateCustomerExceptionHandler : AbstractExceptionHandler<CreateCus
             Instance = exception.Instance,
             AdditionalInfo = exception.AdditionalInfo,
             DomainErrorCode = exception.DomainErrorCode
-        };
-        return await Task.FromResult((problemDetails, exception.StatusCode));
+        };        
+        return Task.FromResult((problemDetails as object, exception.StatusCode));
     }
 }

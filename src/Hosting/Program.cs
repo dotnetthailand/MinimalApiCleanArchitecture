@@ -1,4 +1,4 @@
-// Feature 1: .NET Top level statement
+// Feature 1: ..NET 6 features
 SqliteBootstrap.Initialize();
 var builder = FrameworkHostBuilder.CreateBuilder<EntryPointMarker>(args);
 var app = builder.BuildTemplate();
