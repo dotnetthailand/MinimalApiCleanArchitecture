@@ -2,10 +2,9 @@
 
 public static class ValidationExtensions
 {
-    public static ValidationResult Validate<T>(this T model, IValidatorLocator validatorLocator) where T : class
+    public static ValidationResult Validate<T>(this IValidatorLocator validatorLocator, T model) where T : class
     {       
         _ = validatorLocator ?? throw new ArgumentNullException(nameof(validatorLocator));
-
         var validator = validatorLocator!.GetValidator<T>();
         _ = validator ?? throw new InvalidOperationException($"Cannot find validator for model of type '{typeof(T).Name}'");
 

@@ -1,5 +1,6 @@
 ﻿namespace Lite.Api;
 
+[ImportAssembly(typeof(Service.IAssemblyMarker))]
 public class LiteModule : IModule
 {
     /// <summary>
@@ -16,12 +17,10 @@ public class LiteModule : IModule
     /// <param name="endpoints"></param>
     public void DefineEndpoints(IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapPost("/api/lite", () => "hello")
+        endpoints.MapPost("/api/lite/hello", (IHelloWorldService helloWorldService) => helloWorldService.SayHello())
             .Produces<string>(StatusCodes.Status200OK)
             .ProducesValidationProblem()
-            .WithName("Hello lite")
-            .WithTags("Lite Module")
-            .WithMetadata(new EndpointNameMetadata("Lite Module:Hello lite"));
+            .WithTags("Lite Module");
 
     }
 }

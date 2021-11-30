@@ -10,12 +10,10 @@
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
 	</ItemGroup>
 	<ItemGroup>
+	  <PackageReference Include="RepoDb.Sqlite.Microsoft" Version="1.0.0" />
+	</ItemGroup>
+	<ItemGroup>
 	  <ProjectReference Include="..\..\..\Library\RepoDb.Microsoft.Extensions.DependencyInjection\RepoDb.Microsoft.Extensions.DependencyInjection.csproj" />
 	  <ProjectReference Include="..\Customer.Application\Customer.Application.csproj" />
-	</ItemGroup>
-
-
-	<ItemGroup>
-		<PackageReference Include="RepoDb.Sqlite.Microsoft" Version="1.0.0" />
 	</ItemGroup>
 </Project>

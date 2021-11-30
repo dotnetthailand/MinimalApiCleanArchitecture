@@ -1,13 +1,7 @@
 // Feature 1: .NET Top level statement
 SqliteBootstrap.Initialize();
-var builder = WebApplication.CreateBuilder(args);
-builder.AddSerilog();
-builder.AddSwagger();
-builder.AddModuleMarker<EntryPointMarker>();
-var app = builder.Build();
-app.UseMiddleware<GlobalExceptionMiddleware>();
-app.UseSwaggerEndpoints();
-app.UseRepoDB();
-app.UseEndpointDefinitions();
-await Database.SeedData(builder.Configuration.GetConnectionString("CustomerDb"));
+var builder = FrameworkHostBuilder.CreateBuilder<EntryPointMarker>(args);
+var app = builder.BuildTemplate();
+// Seed Customer module data
+await Customer.Infrastructure.Database.SeedData(builder.Configuration.GetConnectionString("CustomerDb"));
 await app.RunAsync();

@@ -1,15 +1,15 @@
 ﻿namespace Microsoft.AspNetCore.Builder;
 
-internal static partial class ServiceCollectionExtensions
+public static partial class ServiceCollectionExtensions
 {
-    internal static WebApplicationBuilder AddSwagger(this WebApplicationBuilder builder)
+    public static WebApplicationBuilder AddSwagger(this WebApplicationBuilder builder)
     {
         builder.Services.AddSwagger();
 
         return builder;
     }
 
-    internal static IServiceCollection AddSwagger(this IServiceCollection services)
+    public static IServiceCollection AddSwagger(this IServiceCollection services)
     {
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen(c => {

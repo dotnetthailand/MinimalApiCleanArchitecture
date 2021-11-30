@@ -19,7 +19,7 @@ public class CreateCustomerEndpoint
         ICustomerRepository customerRepository, 
         CancellationToken cancellationToken)
     {
-        var result = customerDto.Validate(validatorLocator);
+        var result = validatorLocator.Validate(customerDto);
         if (!result.IsValid)
         {
             throw new ValidationException(result.Errors);

@@ -12,7 +12,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\..\FrameworkAgnostic\FrameworkAgnostic.csproj" />
+		<ProjectReference Include="..\..\..\Framework\FrameworkAgnostic\FrameworkAgnostic.csproj" />
 		<ProjectReference Include="..\Customer.Application\Customer.Application.csproj" />
 		<ProjectReference Include="..\Customer.Infrastructure\Customer.Infrastructure.csproj" />
 	</ItemGroup>

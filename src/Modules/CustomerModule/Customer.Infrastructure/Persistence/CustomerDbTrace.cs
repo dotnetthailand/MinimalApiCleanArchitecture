@@ -9,6 +9,18 @@ public class CustomerDbTrace : ICustomerDbTrace
     {
         _auditTraceHandler = auditTraceHandler;
     }
+
+    public void BeforeUpdate(CancellableTraceLog log)
+    {
+        _auditTraceHandler.BeforeUpdate(log);
+    }
+    public void BeforeInsert(CancellableTraceLog log)
+    {
+        _auditTraceHandler.BeforeInsert(log);
+
+    }
+
+
     public void AfterAverage(TraceLog log)
     {
 
@@ -209,11 +221,7 @@ public class CustomerDbTrace : ICustomerDbTrace
 
     }
 
-    public void BeforeInsert(CancellableTraceLog log)
-    {
-        _auditTraceHandler.BeforeInsert(log);
 
-    }
 
     public void BeforeInsertAll(CancellableTraceLog log)
     {
@@ -280,10 +288,7 @@ public class CustomerDbTrace : ICustomerDbTrace
 
     }
 
-    public void BeforeUpdate(CancellableTraceLog log)
-    {
-        _auditTraceHandler.BeforeUpdate(log);
-    }
+ 
 
     public void BeforeUpdateAll(CancellableTraceLog log)
     {

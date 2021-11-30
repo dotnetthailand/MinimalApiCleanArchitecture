@@ -1,4 +1,5 @@
 ﻿namespace Customer.WebApi;
+
 /// <summary>
 /// Application Module
 /// </summary>
@@ -24,12 +25,28 @@ public class CustomerModule : IModule
     /// <param name="endpoints"></param>
     public void DefineEndpoints(IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapPost("/api/create-customer", CreateCustomerEndpoint.CreateNewCustomer)
+        endpoints
+            .MapPost("/api/create-customer", CreateCustomerEndpoint.CreateNewCustomer)
             .Produces<CreateCustomerResponse>(StatusCodes.Status200OK)
             .ProducesValidationProblem()
-            .WithName("Create Customer")
-            .WithTags("Customer Module")
-            .WithMetadata(new EndpointNameMetadata("Customer Module: Create Customer"));
+            .WithName("create-customer")           
+            .WithTags("Customer Mudule EndPoints");
+
+        endpoints
+            .MapGet("/api/get-customer/{id}", QueryCustomerEndpoint.QueryCustomer)
+            .Produces<QueryCustomerResponse>(StatusCodes.Status200OK)
+            .Produces(StatusCodes.Status404NotFound)
+            .ProducesValidationProblem()
+            .WithName("get-customer")
+            .WithTags("Customer Mudule EndPoints");
+
+        endpoints
+            .MapGet("/api/get-order/{id}/{orderId}", QueryCustomerOrderEndpoint.QueryCustomerOrder)
+            .Produces<QueryCustomerOrderResponse>(StatusCodes.Status200OK)
+            .Produces(StatusCodes.Status404NotFound)
+            .ProducesValidationProblem()
+            .WithName("get-customer-order")
+            .WithTags("Customer Mudule EndPoints");
 
     }
 }

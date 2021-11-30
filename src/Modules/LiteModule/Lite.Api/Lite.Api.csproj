@@ -12,8 +12,9 @@
 	</ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\FrameworkAgnostic\FrameworkAgnostic.csproj" />
+    <ProjectReference Include="..\..\..\Framework\FrameworkAgnostic\FrameworkAgnostic.csproj" />
     <ProjectReference Include="..\..\..\Framework\SharedKernel\SharedKernel.csproj" />
+    <ProjectReference Include="..\Lite.Service\Lite.Service.csproj" />
   </ItemGroup>
 
 </Project>

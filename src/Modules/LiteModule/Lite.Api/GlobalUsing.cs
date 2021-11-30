@@ -4,3 +4,5 @@ global using Microsoft.AspNetCore.Routing;
 global using Microsoft.Extensions.Configuration;
 global using Microsoft.Extensions.DependencyInjection;
 global using FrameworkAgnostic;
+global using FrameworkAgnostic.Attributes;
+global using Lite.Service;

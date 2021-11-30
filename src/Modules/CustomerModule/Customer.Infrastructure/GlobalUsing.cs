@@ -8,5 +8,6 @@ global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.Extensions.Options;
 global using RepoDb;
 global using RepoDb.Interfaces;
+global using RepoDb.Attributes.Parameter;
 global using RepoDb.Microsoft.Extensions.DependencyInjection;
 global using SharedKernel.Entities;

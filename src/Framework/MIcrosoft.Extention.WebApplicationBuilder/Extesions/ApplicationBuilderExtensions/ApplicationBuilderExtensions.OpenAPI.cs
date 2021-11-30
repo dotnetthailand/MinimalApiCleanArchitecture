@@ -1,6 +1,6 @@
 ﻿namespace Microsoft.AspNetCore.Builder;
 
-internal static partial class ApplicationBuilderExtensions
+public static partial class ApplicationBuilderExtensions
 {
     public static IApplicationBuilder UseSwaggerEndpoints(this IApplicationBuilder app, string routePrefix = "")
     {

@@ -1,8 +1,8 @@
 ﻿namespace Microsoft.AspNetCore.Builder;
 
-internal static partial class ServiceCollectionExtensions
+public static partial class ServiceCollectionExtensions
 {
-    internal static WebApplicationBuilder AddSerilog(this WebApplicationBuilder builder)
+    public static WebApplicationBuilder AddSerilog(this WebApplicationBuilder builder)
     {
         Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Debug()

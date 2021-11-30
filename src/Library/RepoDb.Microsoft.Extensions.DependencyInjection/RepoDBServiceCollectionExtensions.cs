@@ -13,7 +13,7 @@ public static class RepoDBServiceCollectionExtensions
         foreach (var item in ScanEntityConfigurationClass(assembliesToScan))
         {
             item.Configure(services);
-            services.TryAddSingleton(item);
+            services.AddSingleton(item);
         }
         return services;
     }

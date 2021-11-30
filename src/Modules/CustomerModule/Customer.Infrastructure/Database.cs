@@ -1,4 +1,4 @@
-﻿namespace Hosting.Seed;
+﻿namespace Customer.Infrastructure;
 
 public static class Database
 {
@@ -18,11 +18,11 @@ public static class Database
                     (
                         Id INTEGER PRIMARY KEY
                         , Number VARCHAR NOT NULL
-                        , Description VARCHAR
+                        , Description VARCHAR                       
+                        , TotalPrice DECIMAL
+                        , CustomerId INTEGER NOT NULL
                         , CreatedDate DATETIME
                         , LastModifiedDate DATETIME
-                        , TotalPrice DECIMAL
-                        , CustomerId INTEGER NOT NULL                      
                         , FOREIGN KEY(CustomerId) REFERENCES Customer(Id)
                     );");
         await connection.ExecuteNonQueryAsync(
@@ -59,25 +59,33 @@ public static class Database
             if (await connection.ExecuteScalarAsync<int>("SELECT COUNT(*) FROM Customer") == 0)
             {
                 // Add Customer
-                await connection.InsertAsync("Customer", new
+                await connection.InsertAsync<Customer.Core.Entities.Customer>("Customer", new Customer.Core.Entities.Customer
                 {
                     FirstName = "Jone",
                     LastName = "Red",
                     CreatedDate = DateTime.Now,
                     LastModifiedDate = DateTime.Now,
                 });
-
+                // Add Order 
+                await connection.InsertAsync<Customer.Core.Entities.Order>("[Order]", new Customer.Core.Entities.Order
+                {
+                    Number = "Order001",
+                    Description = "IPhonw Order 001",
+                    CustomerId = 1,
+                    CreatedDate = DateTime.Now,
+                    LastModifiedDate = DateTime.Now,
+                });
                 // Add Products
-                await connection.InsertAllAsync("Product", new[]
+                await connection.InsertAllAsync<Customer.Core.Entities.Product>("Product", new Customer.Core.Entities.Product[]
                   {
-                        new {
+                        new Customer.Core.Entities.Product{
                             Name="Samsung s21",
                             SKU="SKU001",
                             UnitPrice= 32000,
                             CreatedDate = DateTime.Now,
                             LastModifiedDate = DateTime.Now,
                         },
-                        new {
+                        new Customer.Core.Entities.Product{
                             Name="IPhone 13",
                             SKU="SKU002",
                             UnitPrice= 45000,
@@ -85,20 +93,8 @@ public static class Database
                             LastModifiedDate = DateTime.Now,
                         }
                     });
-
                 // Add Order 
-                await connection.InsertAsync("[Order]", new
-                {
-                    Number = "Order001",
-                    Description = "IPhonw Order 001",
-                    CreatedDate = DateTime.Now,
-                    LastModifiedDate = DateTime.Now,
-                    TotalPrice = 45000,
-                    CustomerId = 1,
-                });
-
-                // Add Order 
-                await connection.InsertAsync("OrderLine", new
+                await connection.InsertAsync<Customer.Core.Entities.OrderLine>("OrderLine", new Customer.Core.Entities.OrderLine
                 {
                     OrderId = 1,
                     ProductId = 2,

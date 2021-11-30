@@ -1,20 +1,25 @@
 ﻿namespace Microsoft.AspNetCore.Builder;
 
-public static class ApplicationBuilderExtensions
+public static partial class ApplicationBuilderExtensions
 {
     internal static bool isConfigureServices = false;
     public static WebApplicationBuilder AddModuleMarker<TEntryPointMarker>(this WebApplicationBuilder builder)
         where TEntryPointMarker : IEntryPointMarker
     {
+        builder.AddModuleMarker(typeof(TEntryPointMarker));
+        return builder;
+    }
+
+    public static WebApplicationBuilder AddModuleMarker(this WebApplicationBuilder builder,Type entryType)
+    {
         if (isConfigureServices) return builder;
-        HashSet<Assembly> assemblies = new();
-        var entryType = typeof(TEntryPointMarker);
+        HashSet<Assembly> assemblies = new();       
         assemblies.Add(typeof(FrameworkAgnostic.IAssemblyMarker).Assembly);
         assemblies.Add(typeof(SharedKernel.IAssemblyMarker).Assembly);
         foreach (var dependedModuleType in entryType
                                             .GetAutoWireProvider()
                                             .SelectMany(descriptor => descriptor.GetDependedTypes()))
-        {           
+        {
             builder.RegisterModules(assemblies, dependedModuleType);
         }
         // Add Core Framework
@@ -25,6 +30,7 @@ public static class ApplicationBuilderExtensions
         isConfigureServices = true;
         return builder;
     }
+
 
     public static WebApplicationBuilder RegisterModules(
         this WebApplicationBuilder builder,
